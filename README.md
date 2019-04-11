@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+##Notes
+
+JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
+
+
 ## Available Scripts
 
 In the project directory, you can run:
