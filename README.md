@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-##Notes
+## Notes
 
 JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
 
