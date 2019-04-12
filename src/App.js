@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 import { Button, 
          DatePicker, 
@@ -20,6 +21,15 @@ class App extends Component {
     message.info(`Selected Date: ${dateTo ? dateTo.format("YYYY-MM-DD") : "None"}`);
     this.setState({ dateTo });
   };
+
+  componentDidMount() {
+    axios.get('https://api.jsonbin.io/b/5cafaeb4c0338e327afea672')
+    .then( (response) => {
+      console.log( response )
+      // this.setState({ideas: response.data})
+    })
+    .catch( (error) => console.log(error))
+  }
 
   render() {
     return (
