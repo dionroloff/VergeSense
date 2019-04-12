@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>VergeSense</h1>
+          <Divider><h1>VergeSense</h1></Divider>
         </header>
         {/* <Button type="primary" onClick={this.handleClick}>Hello</Button> */}
         {/* <Slider 
