@@ -8,12 +8,17 @@ import { Button,
 class App extends Component {
 
   state = {
-    date: null,
+    dateFrom: null,
+    dateTo: null
   };
 
-  handleChange = date => {
-    message.info(`Selected Date: ${date ? date.format("YYYY-MM-DD") : "None"}`);
-    this.setState({ date });
+  handleChangeDateFrom = (dateFrom) => {
+    message.info(`Selected Date: ${dateFrom ? dateFrom.format("YYYY-MM-DD") : "None"}`);
+    this.setState({ dateFrom });
+  };
+  handleChangeDateTo = (dateTo) => {
+    message.info(`Selected Date: ${dateTo ? dateTo.format("YYYY-MM-DD") : "None"}`);
+    this.setState({ dateTo });
   };
 
   render() {
@@ -32,10 +37,15 @@ class App extends Component {
           onAfterChange={onAfterChange} 
           /> */}
 
-        <div style={{ width: 400, margin: "50px auto" }}>
-          <DatePicker onChange={this.handleChange} />
-          <div style={{ marginTop: 20 }}>
-            Selected Date: {this.state.date ? this.state.date.format("YYYY-MM-DD") : "None"}
+        <div>
+          <DatePicker id="dateFrom" onChange={this.handleChangeDateFrom} style={{ width: 200, margin: "15px auto", marginTop: 20 }}/>
+          <div>
+            Selected Date: {this.state.dateFrom ? this.state.dateFrom.format("YYYY-MM-DD") : "None"}
+          </div>
+
+          <DatePicker id="dateTo" onChange={this.handleChangeDateTo} style={{ width: 200, margin: "15px auto", marginTop: 20 }}/>
+          <div>
+            Selected Date: {this.state.dateTo ? this.state.dateTo.format("YYYY-MM-DD") : "None"}
           </div>
         </div>
 

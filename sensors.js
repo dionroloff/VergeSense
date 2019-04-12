@@ -22,12 +22,12 @@ function getSensorReadings(timestamp, data) {
 };
 
 //this function does not assume a number of sensors
-//and will return an array of strings of each of the //sensors 
+//and will return an array of strings of each of the sensors 
 function getSensors(data) {
   let sensors = [];
   
   //for each object in the data array,
-  //check if its "sensor" property exists
+  //check if its "sensor" property already exists
   //in the sensors array, if not, push the string
   data.forEach( (obj) => {
     let sensor = obj.sensor;
@@ -39,12 +39,12 @@ function getSensors(data) {
   return sensors;
 };
 
-//returns a number of the most number
+//this function returns the highest number
 //of people that an individual sensor reports
 //at a given timestamp
 function getMostNumberOfPeople(sensor, timestamp, data) {
   let mostPeople = 0;
-
+  
   let sensorReportAtParticularTime = [];
   data.filter ( (obj) => {
     if (obj.time === timestamp && obj.sensor === sensor) {
@@ -62,3 +62,4 @@ function getMostNumberOfPeople(sensor, timestamp, data) {
   });
   return mostPeople;
 };
+
