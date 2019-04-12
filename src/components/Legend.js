@@ -1,21 +1,20 @@
 import React, { Component } from "react";
-import { Divider } from 'antd';
 
 class Legend extends Component {
     render() {
-
-    const sensors = [1, 2, 3, 4];
-
         return(
             <div>
-                <p><u><b>Legend</b></u></p>
-                -<p style={{color: "#88C7C5"}} >Sensor 1</p>
+                {/* <u><h4>Legend</h4></u> */}
+                {/* Light Blue */}
+                <p style={{color: "#5DBCD2"}} >Sensor 1</p>
+                {/* Dark Blue */}
                 -<p style={{color: "#293169"}} >Sensor 2</p>
+                {/* Orange */}
                 -<p style={{color: "#D79C6C"}} >Sensor 3</p>
+                {/* Teal */}
                 -<p style={{color: "#208580"}} >Sensor 4</p>
-                -
             </div>
-        )
+        );
     }
 }
 

@@ -24,17 +24,10 @@ class App extends Component {
         <header className="App-header">
           <Divider><h1>VergeSense</h1></Divider>
         </header>
-        {/* <Button type="primary" onClick={this.handleClick}>Hello</Button> */}
-        {/* <Slider 
-          range step={10} 
-          defaultValue={[20, 50]} 
-          onChange={onChange} 
-          onAfterChange={onAfterChange} 
-          /> */}
         <Calendar />
+        {/* Ant design divider */}
         <Divider/>
         <Graph/>
-        
       </div>
     );
   }
