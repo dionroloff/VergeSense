@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Slider, Button, Divider } from "antd";
+import { Divider } from "antd";
 import axios from "axios";
 
 import Graph from '../src/components/Graph';

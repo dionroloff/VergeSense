@@ -10,17 +10,20 @@ class Calendar extends Component {
     dateTo: null
   };
 
-  handleChangeDateFrom = dateFrom => {
+  handleChangeDateFrom = ( dateFrom ) => {
     message.info(
-      `Selected Date: ${dateFrom ? dateFrom.format("YYYY-MM-DD") : "None"}`
+      `Selected Date: ${dateFrom ? dateFrom.format("MMM Do YYYY") : "None"}`
     );
     this.setState({ dateFrom });
+    console.log( dateFrom );
   };
-  handleChangeDateTo = dateTo => {
+
+  handleChangeDateTo = ( dateTo ) => {
     message.info(
-      `Selected Date: ${dateTo ? dateTo.format("YYYY-MM-DD") : "None"}`
+      `Selected Date: ${dateTo ? dateTo.format("MMM Do YYYY") : "None"}`
     );
     this.setState({ dateTo });
+    console.log( dateTo );
   };
 
   render() {
@@ -28,7 +31,7 @@ class Calendar extends Component {
       <div>
         <Row className="calendars">
           <Col span={12} >
-          <h4>Date From</h4>
+          <h4>From</h4>
             <DatePicker
               id="dateFrom"
               onChange={this.handleChangeDateFrom}
@@ -37,12 +40,12 @@ class Calendar extends Component {
             <div>
               Selected Date:{" "}
               {this.state.dateFrom
-                ? this.state.dateFrom.format("YYYY-MM-DD")
+                ? this.state.dateFrom.format("MMM Do YYYY")
                 : "None"}
             </div>
           </Col>
           <Col span={12}>
-          <h4>Date To</h4>
+          <h4>To</h4>
             <DatePicker
               id="dateTo"
               onChange={this.handleChangeDateTo}
@@ -51,7 +54,7 @@ class Calendar extends Component {
             <div>
               Selected Date:{" "}
               {this.state.dateTo
-                ? this.state.dateTo.format("YYYY-MM-DD")
+                ? this.state.dateTo.format("MMM Do YYYY")
                 : "None"}
             </div>
           </Col>
