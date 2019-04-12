@@ -1,6 +1,6 @@
 //this function returns the most number of people
 //each sensor reports at a given timestamp
-sensorReadings = (timestamp, data) => {
+function getSensorReadings(timestamp, data) {
   //the return value is an object containing the 
   //highest number of people each sensor reported at a given point in time.
   let results = {
@@ -21,9 +21,9 @@ sensorReadings = (timestamp, data) => {
   return results;
 };
 
-//this function does not assume a particular number of sensors
+//this function does not assume a number of sensors
 //and will return an array of strings of each of the //sensors 
-getSensors = (data) => {
+function getSensors(data) {
   let sensors = [];
   
   //for each object in the data array,
@@ -39,10 +39,10 @@ getSensors = (data) => {
   return sensors;
 };
 
-//this function returns a number of the most number
+//returns a number of the most number
 //of people that an individual sensor reports
 //at a given timestamp
-getMostNumberOfPeople = (sensor, timestamp, data) => {
+function getMostNumberOfPeople(sensor, timestamp, data) {
   let mostPeople = 0;
 
   let sensorReportAtParticularTime = [];
@@ -55,7 +55,7 @@ getMostNumberOfPeople = (sensor, timestamp, data) => {
   })
 
   sensorReportAtParticularTime.forEach( (obj) => {
-    newHigh = obj.number_of_people;
+    let newHigh = obj.number_of_people;
     if(newHigh > mostPeople) {
       mostPeople = newHigh;
     }
