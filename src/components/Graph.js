@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import Legend from "./Legend";
 import { Row, Col } from "antd";
 import "../../node_modules/react-vis/dist/style.css";
@@ -14,12 +15,15 @@ import {
 
 const MSEC_DAILY = 86400000;
 
-export default function Graph() {
+function Graph(props) {
   const startTimestamp = new Date("April 11 2019").getTime();
   const endTimestamp = new Date("April 11 2019").getTime();
 
+  const data = props.apiResponse;
+
   return (
     <Row>
+      {JSON.stringify(props.reduxStore)}
       <Col span={4}>
         <Legend />
       </Col>
@@ -67,3 +71,10 @@ export default function Graph() {
     </Row>
   );
 }
+
+
+const mapStateToProps = (reduxStore) => ({
+  reduxStore
+});
+
+export default connect(mapStateToProps)(Graph);

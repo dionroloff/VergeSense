@@ -8,14 +8,21 @@ import "./App.css";
 
 class App extends Component {
 
+  state = {
+    apiResponse: null
+  };
+
   componentDidMount() {
     axios
       .get("https://api.jsonbin.io/b/5cafaeb4c0338e327afea672")
-      .then(response => {
-        console.log(response);
-        // this.setState({ideas: response.data})
-      })
-      .catch(error => console.log(error));
+      .then( (response) => {
+        this.setState({apiResponse: response})
+        console.log( this.state.apiResponse );
+        // this.props.dispatch({
+        //   action: 'SET_DATA',
+        //   payload: this.state.apiResponse
+        // })
+      }).catch( (error) => console.log( error ));
   }
 
   render() {
@@ -27,7 +34,7 @@ class App extends Component {
         <Calendar />
         {/* Ant design divider */}
         <Divider/>
-        <Graph/>
+        <Graph apiResponse={this.state.apiResponse}/>
       </div>
     );
   }

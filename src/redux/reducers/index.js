@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import data from './graphData';
+import dates from './graphData';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -8,7 +8,7 @@ import data from './graphData';
 // Lets make a bigger object for our store, with the objects from our reducers.
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
-    data
+    dates
 });
 
 export default rootReducer;

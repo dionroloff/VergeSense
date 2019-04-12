@@ -8,11 +8,11 @@ class Legend extends Component {
                 {/* Light Blue */}
                 <p style={{color: "#5DBCD2"}} >Sensor 1</p>
                 {/* Dark Blue */}
-                -<p style={{color: "#293169"}} >Sensor 2</p>
+                &#9702;<p style={{color: "#293169"}} >Sensor 2</p>
                 {/* Orange */}
-                -<p style={{color: "#D79C6C"}} >Sensor 3</p>
+                &#9702;<p style={{color: "#D79C6C"}} >Sensor 3</p>
                 {/* Teal */}
-                -<p style={{color: "#208580"}} >Sensor 4</p>
+                &#9702;<p style={{color: "#208580"}} >Sensor 4</p>
             </div>
         );
     }

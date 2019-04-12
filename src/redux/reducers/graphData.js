@@ -1,10 +1,10 @@
-const data = (state = [], action) => {
+const dates = (state = [], action) => {
     switch (action.type) {
-        case 'SET_DATA':
+        case "SET_DATA":
           return action.payload;
         default: 
           return state;
     }
 };
 
-export default data;
+export default dates;
