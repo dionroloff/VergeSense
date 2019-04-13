@@ -7,25 +7,28 @@ import { DatePicker, message, Row, Col, Button, TimePicker } from "antd";
 class Calendar extends Component {
   state = {
     dateFrom: null,
-    timeFrom: null,
     dateTo: null,
-    timeTo: null
+    // dateTo: null,
+    // timeTo: null
   };
 
-  handleChangeDateFrom = dateFrom => {
-    message.info(
-      `Selected Date: ${dateFrom ? dateFrom.format("MMM Do YYYY") : null}`
-    );
-    this.setState({ dateFrom });
+  handleChangeDateFrom = (date, dateString) => {
+    this.setState({ dateFrom: dateString });
   };
 
-  handleChangeDateTo = dateTo => {
-    message.info(
-      `Selected Date: ${dateTo ? dateTo.format("MMM Do YYYY") : null}`
-    );
-    this.setState({ dateTo });
-    // will log only the day of week, date, and time
-    console.log("dateto", dateTo._d);
+  handleChangeDateTo = (date, dateString) => {
+    this.setState({ dateTo: dateString });
+  };
+
+  handleChangeTimeFrom = (time, timeString) => {
+    this.setState({
+      dateFrom: this.state.dateFrom + "T" + timeString + "Z"
+    })
+  };
+  handleChangeTimeTo = (time, timeString) => {
+    this.setState({
+      dateTo: this.state.dateTo + "T" + timeString + "Z"
+    })
   };
 
   handleDispatch = () => {
@@ -33,25 +36,10 @@ class Calendar extends Component {
     this.props.dispatch({
       type: "SET_DATA",
       payload: {
-        dateFrom: this.state.dateFrom._d,
-        timeFrom: this.state.timeFrom,
-        dateTo: this.state.dateTo._d,
-        timeTo: this.state.timeTo
+        dateFrom: this.state.dateFrom,
+        dateTo: this.state.dateTo,
       }
     });
-  };
-
-  handleChangeTimeFrom = (time, timeString) => {
-    this.setState({
-      timeFrom: timeString
-    })
-    console.log(`timeString: ${timeString}`);
-  };
-  handleChangeTimeTo = (time, timeString) => {
-    this.setState({
-      timeTo: timeString
-    })
-    console.log(`timeString: ${timeString}`);
   };
 
   render() {
@@ -89,10 +77,12 @@ class Calendar extends Component {
 
         <Row className="button-row">
           <Col>
-            {this.state.dateFrom &&
-             this.state.dateTo &&
-             this.state.timeFrom &&
-             this.state.timeTo !== null ? (
+            {this.state.dateFrom 
+            // &&
+            //  this.state.dateTo &&
+            //  this.state.timeFrom &&
+            //  this.state.timeTo 
+             !== null ? (
               <Button type="primary" onClick={this.handleDispatch}>
                 Show Graph
               </Button>

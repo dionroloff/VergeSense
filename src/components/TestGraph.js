@@ -35,6 +35,7 @@ class TestGraph extends Component {
     const { useCanvas } = this.state;
     const content = useCanvas ? "TOGGLE TO SVG" : "TOGGLE TO CANVAS";
     const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
+
     return (
       <Row>
           {JSON.stringify(this.props.reduxStore.dates)}
