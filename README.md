@@ -5,6 +5,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
 
+## Challenges
+
+Getting the time and date stamps to work how I needed them to when the user chooses them was difficult. These times and dates need to be dispatched to the dates reducer for use in the graph constraints, which has its own challenges.
+
 
 ## Available Scripts
 

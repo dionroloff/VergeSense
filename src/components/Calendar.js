@@ -1,31 +1,32 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { 
-  DatePicker, message, Row, Col, Button
-} from "antd";
+import { connect } from "react-redux";
+
+import moment from "moment";
+import { DatePicker, message, Row, Col, Button, TimePicker } from "antd";
 
 class Calendar extends Component {
-
   state = {
     dateFrom: null,
+    timeFrom: null,
     dateTo: null,
-  };
-  
-  handleChangeDateFrom = ( dateFrom ) => {
-    message.info(
-      `Selected Date: ${dateFrom ? dateFrom.format("MMM Do YYYY") : "None"}`
-    );
-    this.setState({ dateFrom });
-    console.log( "dateFrom", dateFrom._d );
+    timeTo: null
   };
 
-  handleChangeDateTo = ( dateTo ) => {
+  handleChangeDateFrom = dateFrom => {
     message.info(
-      `Selected Date: ${dateTo ? dateTo.format("MMM Do YYYY") : "None"}`
+      `Selected Date: ${dateFrom ? dateFrom.format("MMM Do YYYY") : null}`
+    );
+    this.setState({ dateFrom });
+    console.log("dateFrom", dateFrom);
+  };
+
+  handleChangeDateTo = dateTo => {
+    message.info(
+      `Selected Date: ${dateTo ? dateTo.format("MMM Do YYYY") : null}`
     );
     this.setState({ dateTo });
     // will log only the day of week, date, and time
-    console.log( "dateto", dateTo._d );
+    console.log("dateto", dateTo._d);
   };
 
   handleDispatch = () => {
@@ -37,48 +38,73 @@ class Calendar extends Component {
         dateTo: this.state.dateTo._d
       }
     });
-  }
+  };
+
+  handleChangeTimeFrom = (time, timeString) => {
+    this.setState({
+      timeFrom: timeString
+    })
+    console.log(`timeString: ${timeString}`);
+  };
+  handleChangeTimeTo = (time, timeString) => {
+    this.setState({
+      timeTo: timeString
+    })
+    console.log(`timeString: ${timeString}`);
+  };
 
   render() {
     return (
       <div>
-        <Row className="calendars">
-          <Col span={12} >
-          <h4>From</h4>
+        <Row className="date-pickers">
+          <Col span={12}>
+            <h4>From</h4>
             <DatePicker
               id="dateFrom"
               onChange={this.handleChangeDateFrom}
               style={{ width: 200, margin: "15px auto", marginTop: 20 }}
             />
-            <div>
-              Selected Date:{" "}
-              {this.state.dateFrom
-                ? this.state.dateFrom.format("MMM Do YYYY")
-                : "None"}
-            </div>
+
+            <TimePicker
+              onChange={this.handleChangeTimeFrom}
+              defaultOpenValue={moment("00:00:00", "HH:mm:ss")}
+            />
           </Col>
+
           <Col span={12}>
-          <h4>To</h4>
+            <h4>To</h4>
             <DatePicker
               id="dateTo"
               onChange={this.handleChangeDateTo}
               style={{ width: 200, margin: "15px auto", marginTop: 20 }}
             />
-            <div>
-              Selected Date:{" "}
-              {this.state.dateTo
-                ? this.state.dateTo.format("MMM Do YYYY")
-                : "None"}
-            </div>
+
+            <TimePicker
+              onChange={this.handleChangeTimeTo}
+              defaultOpenValue={moment("00:00:00", "HH:mm:ss")}
+            />
           </Col>
         </Row>
-        <Row><Button type="primary" onClick={this.handleDispatch}>Select Dates</Button></Row>
+
+        <Row className="button-row">
+          <Col>
+            {this.state.timeTo !== null ? (
+              <Button type="primary" onClick={this.handleDispatch}>
+                Show Graph
+              </Button>
+            ) : (
+              <Button disabled type="primary" onClick={this.handleDispatch}>
+                Show Graph
+              </Button>
+            )}
+          </Col>
+        </Row>
       </div>
     );
   }
 }
 
-const mapStateToProps = (reduxStore) => ({
+const mapStateToProps = reduxStore => ({
   reduxStore
 });
 

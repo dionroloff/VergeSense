@@ -16,8 +16,14 @@ import {
 const MSEC_DAILY = 86400000;
 
 function Graph(props) {
-  const startTimestamp = new Date("April 11 2019").getTime();
-  const endTimestamp = new Date("April 11 2019").getTime();
+  const dateFrom = new Date(props.reduxStore.dates.dateFrom);
+  const startTimestamp = dateFrom.getTime();
+
+  const dateTo = new Date(props.reduxStore.dates.dateTo);
+  const endTimestamp = dateTo.getTime();
+
+  console.log("startTimestamp: ", startTimestamp);
+  console.log("endTimestamp: ", endTimestamp);
 
   const data = props.apiResponse;
 
@@ -36,8 +42,8 @@ function Graph(props) {
           <YAxis title="Number of People" />
           <LineSeries
             data={[
-              { x: startTimestamp + MSEC_DAILY, y: 300 },
-              { x: startTimestamp + MSEC_DAILY * 2, y: 500 },
+              { x: startTimestamp + endTimestamp, y: 1000 },
+              { x: startTimestamp + MSEC_DAILY * 2, y: 0 },
               { x: startTimestamp + MSEC_DAILY * 3, y: 1500 },
               { x: startTimestamp + MSEC_DAILY * 4, y: 1200 }
             ]}
