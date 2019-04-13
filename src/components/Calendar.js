@@ -17,7 +17,6 @@ class Calendar extends Component {
       `Selected Date: ${dateFrom ? dateFrom.format("MMM Do YYYY") : null}`
     );
     this.setState({ dateFrom });
-    console.log("dateFrom", dateFrom);
   };
 
   handleChangeDateTo = dateTo => {
@@ -35,7 +34,9 @@ class Calendar extends Component {
       type: "SET_DATA",
       payload: {
         dateFrom: this.state.dateFrom._d,
-        dateTo: this.state.dateTo._d
+        timeFrom: this.state.timeFrom,
+        dateTo: this.state.dateTo._d,
+        timeTo: this.state.timeTo
       }
     });
   };
@@ -56,7 +57,7 @@ class Calendar extends Component {
   render() {
     return (
       <div>
-        <Row className="date-pickers">
+        <Row className="date-time-pickers">
           <Col span={12}>
             <h4>From</h4>
             <DatePicker
@@ -88,7 +89,10 @@ class Calendar extends Component {
 
         <Row className="button-row">
           <Col>
-            {this.state.timeTo !== null ? (
+            {this.state.dateFrom &&
+             this.state.dateTo &&
+             this.state.timeFrom &&
+             this.state.timeTo !== null ? (
               <Button type="primary" onClick={this.handleDispatch}>
                 Show Graph
               </Button>

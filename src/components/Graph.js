@@ -30,11 +30,11 @@ function Graph(props) {
   return (
     <Row>
       {JSON.stringify(props.reduxStore)}
-      <Col span={4}>
+      <Col span={2}>
         <Legend />
       </Col>
 
-      <Col span={20}>
+      <Col span={22}>
         <XYPlot className="graph" xType="time" width={1000} height={300}>
           <HorizontalGridLines />
           <VerticalGridLines />

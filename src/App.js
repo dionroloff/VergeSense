@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Divider } from "antd";
 import axios from "axios";
 
+import TestGraph from '../src/components/TestGraph';
 import Graph from '../src/components/Graph';
 import Calendar from './components/Calendar';
 import "./App.css";
@@ -34,7 +35,8 @@ class App extends Component {
         <Calendar />
         {/* Ant design divider */}
         <Divider/>
-        <Graph apiResponse={this.state.apiResponse}/>
+        {/* <Graph apiResponse={this.state.apiResponse}/> */}
+        <TestGraph/>
       </div>
     );
   }
