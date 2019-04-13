@@ -16,20 +16,20 @@ import {
 const MSEC_DAILY = 86400000;
 
 function Graph(props) {
-  const dateFrom = new Date(props.reduxStore.dates.dateFrom);
-  const startTimestamp = dateFrom.getTime();
+  //dateFrom and dateTo variables are in milliseconds
+  const dateFrom = new Date(props.reduxStore.dates.dateFrom).getTime();
+  // const startTimestamp = dateFrom.getMilliseconds();
 
-  const dateTo = new Date(props.reduxStore.dates.dateTo);
-  const endTimestamp = dateTo.getTime();
+  const dateTo = new Date(props.reduxStore.dates.dateTo).getTime();
+  // const endTimestamp = dateTo.getMilliseconds();
 
-  console.log("startTimestamp: ", startTimestamp);
-  console.log("endTimestamp: ", endTimestamp);
+  console.log(dateTo - dateFrom);
 
   const data = props.apiResponse;
 
   return (
     <Row>
-      {JSON.stringify(props.reduxStore)}
+      {JSON.stringify(props.reduxStore.dates)}
       <Col span={2}>
         <Legend />
       </Col>
@@ -42,13 +42,13 @@ function Graph(props) {
           <YAxis title="Number of People" />
           <LineSeries
             data={[
-              { x: startTimestamp + endTimestamp, y: 1000 },
-              { x: startTimestamp + MSEC_DAILY * 2, y: 0 },
-              { x: startTimestamp + MSEC_DAILY * 3, y: 1500 },
-              { x: startTimestamp + MSEC_DAILY * 4, y: 1200 }
+              { x: dateTo - MSEC_DAILY, y: 1000 },
+              { x: dateTo - MSEC_DAILY * 2, y: 0 },
+              // { x: dateFrom + dateTo * 3, y: 1500 },
+              // { x: dateFrom + dateTo * 4, y: 1200 }
             ]}
           />
-          <LineSeries
+          {/* <LineSeries
             data={[
               { x: startTimestamp + MSEC_DAILY, y: 1400 },
               { x: startTimestamp + MSEC_DAILY * 2, y: 800 },
@@ -71,7 +71,7 @@ function Graph(props) {
               { x: startTimestamp + MSEC_DAILY * 3, y: 100 },
               { x: startTimestamp + MSEC_DAILY * 4, y: 700 }
             ]}
-          />
+          /> */}
         </XYPlot>
       </Col>
     </Row>

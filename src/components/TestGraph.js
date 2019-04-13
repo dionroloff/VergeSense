@@ -1,85 +1,26 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { Row, Col } from "antd";
-import Legend from "./Legend";
-// import ShowcaseButton from '../showcase-components/showcase-button';
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  VerticalBarSeries,
-  VerticalBarSeriesCanvas,
-  LabelSeries
-} from "react-vis";
+import ReactChartkick, { LineChart } from 'react-chartkick'
+import Chart from 'chart.js'
 
-const lightGreenData = [{ x: "A", y: 99 }];
-const lightBlueData = [{ x: "B", y: 11 }];
-const orangeData = [{ x: "C", y: 8 }];
-const darkGreenData = [{ x: "D", y: 19 }];
-
-// const blueData = [{x: 'A', y: 12}, {x: 'B', y: 2}, {x: 'C', y: 11}, {x: 'D', y: 12}];
-
-// const labelData = greenData.map((d, idx) => ({
-//   x: d.x,
-//   y: Math.max(greenData[idx].y, blueData[idx].y)
-// }));
+ReactChartkick.addAdapter(Chart)
 
 class TestGraph extends Component {
-  state = {
-    useCanvas: false
-  };
+
+  data = [
+    {"name":"Sensor 1", "data": {"2017-01-01": 3, "2017-01-02": 4}},
+    {"name":"Sensor 2", "data": {"2017-03-01": 5, "2017-04-01": 34}},
+    {"name":"Sensor 3", "data": {"2017-04-02": 5, "2017-05-01": 3}},
+    {"name":"Sensor 4", "data": {"2017-05-01": 5, "2017-06-01": 3}}
+  ];
 
   render() {
-    const { useCanvas } = this.state;
-    const content = useCanvas ? "TOGGLE TO SVG" : "TOGGLE TO CANVAS";
-    const BarSeries = useCanvas ? VerticalBarSeriesCanvas : VerticalBarSeries;
-
-    return (
-      <Row>
-          {JSON.stringify(this.props.reduxStore.dates)}
-        {/* <Col span={2}>
-          <Legend />
-        </Col> */}
-
-        <Col>
-          {/* <ShowcaseButton
-          onClick={() => this.setState({useCanvas: !useCanvas})}
-          buttonContent={content}
-        /> */}
-          <XYPlot xType="ordinal" width={1000} height={300} xDistance={100}>
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis />
-            <YAxis />
-            <BarSeries
-              className="vertical-bar-series-example"
-              data={lightGreenData}
-            //   style={{ color: "#5DBCD2" }}
-            />
-            <BarSeries
-              className="vertical-bar-series-example"
-              data={lightBlueData}
-            //   style={{ color: "#D79C6C" }}
-            />
-            <BarSeries
-              className="vertical-bar-series-example"
-              data={orangeData}
-            //   style={{ color: "#5DBCD2" }}
-            />
-            <BarSeries
-              className="vertical-bar-series-example"
-              data={darkGreenData}
-            //   style={{ color: "#D79C6C" }}
-            />
-            
-            {/* <BarSeries data={blueData} /> */}
-            {/* <LabelSeries data={labelData} getLabel={d => d.x} /> */}
-          </XYPlot>
-        </Col>
-      </Row>
-    );
+    return(
+      <div>
+          <LineChart data={this.data} />
+      </div>
+    )
   }
 }
 

@@ -3,7 +3,7 @@ import { Divider } from "antd";
 import axios from "axios";
 
 import TestGraph from '../src/components/TestGraph';
-import Graph from '../src/components/Graph';
+// import Graph from '../src/components/Graph';
 import Calendar from './components/Calendar';
 import "./App.css";
 

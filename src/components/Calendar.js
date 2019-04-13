@@ -2,24 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import moment from "moment";
-import { DatePicker, message, Row, Col, Button, TimePicker } from "antd";
+import { DatePicker, Row, Col, Button, TimePicker } from "antd";
 
 class Calendar extends Component {
   state = {
     dateFrom: null,
     dateTo: null,
-    // dateTo: null,
-    // timeTo: null
   };
 
   handleChangeDateFrom = (date, dateString) => {
     this.setState({ dateFrom: dateString });
   };
-
   handleChangeDateTo = (date, dateString) => {
     this.setState({ dateTo: dateString });
   };
-
   handleChangeTimeFrom = (time, timeString) => {
     this.setState({
       dateFrom: this.state.dateFrom + "T" + timeString + "Z"
@@ -30,7 +26,6 @@ class Calendar extends Component {
       dateTo: this.state.dateTo + "T" + timeString + "Z"
     })
   };
-
   handleDispatch = () => {
     console.log("clicked");
     this.props.dispatch({
