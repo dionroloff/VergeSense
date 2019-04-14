@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import moment from "moment";
 import { DatePicker, Row, Col, Button, TimePicker } from "antd";
 
+let timeFrom, timeTo;
+
 class Calendar extends Component {
   state = {
     dateFrom: null,
@@ -17,21 +19,17 @@ class Calendar extends Component {
     this.setState({ dateTo: dateString });
   };
   handleChangeTimeFrom = (time, timeString) => {
-    this.setState({
-      dateFrom: this.state.dateFrom + "T" + timeString + "Z"
-    })
+    timeFrom = timeString;
   };
   handleChangeTimeTo = (time, timeString) => {
-    this.setState({
-      dateTo: this.state.dateTo + "T" + timeString + "Z"
-    })
+    timeTo = timeString;
   };
   handleDispatch = () => {
     this.props.dispatch({
       type: "SET_DATA",
       payload: {
-        dateFrom: this.state.dateFrom,
-        dateTo: this.state.dateTo,
+        dateFrom: this.state.dateFrom + "T" + timeFrom + "Z",
+        dateTo: this.state.dateTo + "T" + timeTo + "Z"
       }
     });
   };

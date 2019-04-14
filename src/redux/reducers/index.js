@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import dates from './graphData';
+import graphData from './graphData';
 
 const rootReducer = combineReducers({
-    dates
+    graphData
 });
 
 export default rootReducer;
