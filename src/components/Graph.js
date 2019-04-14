@@ -29,7 +29,6 @@ function Graph(props) {
 
   return (
     <Row>
-      {JSON.stringify(props.reduxStore.dates)}
       <Col span={2}>
         <Legend />
       </Col>

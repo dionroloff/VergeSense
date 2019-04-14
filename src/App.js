@@ -18,12 +18,9 @@ class App extends Component {
       .get("https://api.jsonbin.io/b/5cafaeb4c0338e327afea672")
       .then( (response) => {
         this.setState({apiResponse: response})
-        console.log( this.state.apiResponse );
-        // this.props.dispatch({
-        //   action: 'SET_DATA',
-        //   payload: this.state.apiResponse
-        // })
-      }).catch( (error) => console.log( error ));
+        // console.log( this.state.apiResponse );
+      }).catch( (error) => 
+        console.log( `Error during GET request: ${error}` ));
   }
 
   render() {
@@ -36,7 +33,7 @@ class App extends Component {
         {/* Ant design divider */}
         <Divider/>
         {/* <Graph apiResponse={this.state.apiResponse}/> */}
-        <TestGraph/>
+        <TestGraph apiResponse={this.state.apiResponse}/>
       </div>
     );
   }

@@ -27,7 +27,6 @@ class Calendar extends Component {
     })
   };
   handleDispatch = () => {
-    console.log("clicked");
     this.props.dispatch({
       type: "SET_DATA",
       payload: {
