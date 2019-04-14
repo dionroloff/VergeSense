@@ -9,7 +9,7 @@ let timeFrom, timeTo;
 class Calendar extends Component {
   state = {
     dateFrom: null,
-    dateTo: null,
+    dateTo: null
   };
 
   handleChangeDateFrom = (date, dateString) => {
@@ -32,6 +32,14 @@ class Calendar extends Component {
         dateTo: this.state.dateTo + "T" + timeTo + "Z"
       }
     });
+
+    // this.props.dispatch({
+    //   type: "SET_DATA",
+    //   payload: {
+    //     dateFrom: "2019-03-07T00:00:00Z",
+    //     dateTo: "2019-03-07T20:00:00Z"
+    //   }
+    // });
   };
 
   render() {
@@ -69,19 +77,20 @@ class Calendar extends Component {
 
         <Row className="button-row">
           <Col>
-            {this.state.dateFrom 
-            // &&
-            //  this.state.dateTo &&
-            //  this.state.timeFrom &&
-            //  this.state.timeTo 
-             !== null ? (
-              <Button type="primary" onClick={this.handleDispatch}>
-                Show Graph
-              </Button>
+            {this.state.dateFrom && this.state.dateTo !== null ? (
+              <div>
+                <p>Please Select Both Day and Time Filters</p>
+                <Button type="primary" onClick={this.handleDispatch}>
+                  Show Graph
+                </Button>
+              </div>
             ) : (
-              <Button disabled type="primary" onClick={this.handleDispatch}>
-                Show Graph
-              </Button>
+              <div>
+                <p>Please Select Both Day and Time Filters</p>
+                <Button disabled type="primary" onClick={this.handleDispatch}>
+                  Show Graph
+                </Button>
+              </div>
             )}
           </Col>
         </Row>
