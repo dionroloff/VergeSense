@@ -1,84 +1,118 @@
-import React from "react";
-import { connect } from 'react-redux';
-import Legend from "./Legend";
-import { Row, Col } from "antd";
-import "../../node_modules/react-vis/dist/style.css";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import { Spin } from 'antd';
 
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  HorizontalGridLines,
-  VerticalGridLines,
-  LineSeries
-} from "react-vis";
+import ReactChartkick, { LineChart } from "react-chartkick";
+import Chart from "chart.js";
 
-const MSEC_DAILY = 86400000;
+ReactChartkick.addAdapter(Chart);
 
-function Graph(props) {
-  //dateFrom and dateTo variables are in milliseconds
-  const dateFrom = new Date(props.reduxStore.dates.dateFrom).getTime();
-  // const startTimestamp = dateFrom.getMilliseconds();
+let graphData = [];
 
-  const dateTo = new Date(props.reduxStore.dates.dateTo).getTime();
-  // const endTimestamp = dateTo.getMilliseconds();
+class Graph extends Component {
 
-  console.log(dateTo - dateFrom);
+  componentWillMount() {
+    axios.get("https://api.jsonbin.io/b/5cafaeb4c0338e327afea672")
+      .then(response => {
+        this.props.dispatch({
+          type: "SET_API_DATA",
+          payload: response
+        });
+      })
+      .catch(error => console.log(`Error during GET request: ${error}`));
+  }
 
-  const data = props.apiResponse;
+  render() {
 
-  return (
-    <Row>
-      <Col span={2}>
-        <Legend />
-      </Col>
 
-      <Col span={22}>
-        <XYPlot className="graph" xType="time" width={1000} height={300}>
-          <HorizontalGridLines />
-          <VerticalGridLines />
-          <XAxis title="Time" />
-          <YAxis title="Number of People" />
-          <LineSeries
-            data={[
-              { x: dateTo - MSEC_DAILY, y: 1000 },
-              { x: dateTo - MSEC_DAILY * 2, y: 0 },
-              // { x: dateFrom + dateTo * 3, y: 1500 },
-              // { x: dateFrom + dateTo * 4, y: 1200 }
-            ]}
-          />
-          {/* <LineSeries
-            data={[
-              { x: startTimestamp + MSEC_DAILY, y: 1400 },
-              { x: startTimestamp + MSEC_DAILY * 2, y: 800 },
-              { x: startTimestamp + MSEC_DAILY * 3, y: 600 },
-              { x: startTimestamp + MSEC_DAILY * 4, y: 2000 }
-            ]}
-          />
-          <LineSeries
-            data={[
-              { x: startTimestamp + MSEC_DAILY, y: 1000 },
-              { x: startTimestamp + MSEC_DAILY * 2, y: 400 },
-              { x: startTimestamp + MSEC_DAILY * 3, y: 200 },
-              { x: startTimestamp + MSEC_DAILY * 4, y: 1500 }
-            ]}
-          />
-          <LineSeries
-            data={[
-              { x: startTimestamp + MSEC_DAILY, y: 500 },
-              { x: startTimestamp + MSEC_DAILY * 2, y: 200 },
-              { x: startTimestamp + MSEC_DAILY * 3, y: 100 },
-              { x: startTimestamp + MSEC_DAILY * 4, y: 700 }
-            ]}
-          /> */}
-        </XYPlot>
-      </Col>
-    </Row>
-  );
+    if (this.props.reduxStore.graphData.apiData.length === 0) {
+      console.log("waiting for API");
+      return (<div>
+        <p>Waiting for API Data...</p>
+        <Spin/>
+      </div>)
+      
+    } else {
+
+    let totalReadings = this.props.reduxStore.graphData.apiData.data;
+
+    if (this.props.reduxStore.graphData.dates.length !== 0) {
+      const dateFrom = this.props.reduxStore.graphData.dates.dateFrom;
+      const dateTo = this.props.reduxStore.graphData.dates.dateTo;
+
+      //This will cycle through the entire JSON object and get only
+      //those readings between the dates the user selects.
+      const timeFilteredSensorReports = totalReadings.filter( (report) => {
+        return report.time >= [dateFrom] && report.time <= [dateTo];
+      });
+      //there are four unnamed sensors
+      const unnamedSensors = totalReadings.filter( (report) => {
+        return report.sensor === "";
+      });
+
+      console.log("unnamedSensors: ", unnamedSensors);
+
+      function getSensors(someData) {
+        let sensors = [];
+        
+        //for each object in the data array,
+        //check if its "sensor" property already exists
+        //in the sensors array, if not, push the string
+        someData.forEach( (obj) => {
+          if (obj.sensor === "") {
+            let sensor = "Unnamed Sensor";
+            sensors.push(sensor);
+             
+          } else {
+            let sensor = obj.sensor;
+            if (!sensors.includes(sensor)) {
+              sensors.push(sensor) 
+            }
+          }
+        });
+        return sensors;
+      };
+      //totalSensors will return an array of each sensor used
+      //in the filters reports
+      const totalSensors = getSensors(timeFilteredSensorReports);
+
+      console.log("totalSensors: ", totalSensors);
+
+      totalSensors.forEach( (sensor) => {
+        graphData.push({
+          name: sensor, 
+          data: {}
+        });
+      });
+
+      for (let i = 0; i < timeFilteredSensorReports.length; i++) {
+        for (let j = 0; j < graphData.length; j++) {
+          if (timeFilteredSensorReports[i].sensor === graphData[j].name) {
+            Object.assign( graphData[j].data, {
+              [timeFilteredSensorReports[i].time]: [timeFilteredSensorReports[i].number_of_people]
+            });
+          }
+        }
+      }
+      // console.log("graphData: ", graphData);
+
+    } else {
+      console.log("dates.length === 0");
+    }
+  }
+  
+
+    return (
+      <div>
+        {/* {JSON.stringify(this.props.reduxStore)} */}
+        <LineChart data={graphData} />
+      </div>
+    );
+  }
 }
 
-
-const mapStateToProps = (reduxStore) => ({
+const mapStateToProps = reduxStore => ({
   reduxStore
 });
 
