@@ -8,7 +8,7 @@ JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
 
 ## ERD
 
-![ERD for project](ERD)
+![ERD for project](ERD.png)
 
 ## Challenges
 
