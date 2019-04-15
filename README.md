@@ -6,6 +6,10 @@ This project was written using JavaScript's React framework, Chart.js, and Ant D
 
 JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
 
+## ERD
+
+![ERD for project](ERD)
+
 ## Challenges
 
 My thought process: I was confident in creating the database and writing the get request to the API, as these are things I have done several times before. However, I knew that when it came to constructing a graph and populating it with data points that I might have a bit more work to do. I had never really used graphs in any of my projects before, so this was something I would have to learn as I went.
