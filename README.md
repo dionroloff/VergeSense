@@ -1,5 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+# VergeSense Code Challenge
 
 ## Notes
 
@@ -7,8 +6,14 @@ JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
 
 ## Challenges
 
-Getting the time and date stamps to work how I needed them to when the user chooses them was difficult. These times and dates need to be dispatched to the dates reducer for use in the graph constraints, which has its own challenges.
+My thought process: I was confident in creating the database and writing the get request to the API, as these are things I have done several times before. However, I knew that when it came to constructing a graph and populating it with data points that I might have a bit more work to do. I had never really used graphs in any of my projects before, so this was something I would have to learn as I went.
 
+Luckily, chartkick makes the actual graph quite easy to navigate, the hard part was writing the logic for taking the raw API data and filtering it through the two time-points the user selects,
+then assigning the individual sensor reports to chartkick's data property.
+
+Getting the time and date stamps to work how I needed them to when the user chooses them was also challenging. For instance they needed to be specificly formatted and dispatched to my dates reducer for use in the graph constraints, which as noted had its own challenges.
+
+Overall I am pleased with the app and how it looks and functions. I think it is rather useful and visually appealing.
 
 ## Available Scripts
 
@@ -19,60 +24,5 @@ In the project directory, you can run:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The entire app is a single page. The user selects a start and end date with two day and time pickers, then after clicking the "Show Graph" button the data will render on the graph if there are sensor reports which occured between those two points in time. The user can select and deselect individual sensors to make the focus on particular sensors and scale the graph. The y axis represents the number of people a sensor reports at a time point, and the x axis represents time.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

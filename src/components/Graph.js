@@ -24,15 +24,13 @@ class Graph extends Component {
   }
 
   render() {
-
-
     if (this.props.reduxStore.graphData.apiData.length === 0) {
-      console.log("waiting for API");
+      console.log("Waiting for API Data...");
       return (<div>
-        <p>Waiting for API Data...</p>
-        <Spin/>
-      </div>)
-      
+                <p>Waiting for API Data...</p>
+                <Spin/>
+              </div>
+             );
     } else {
 
     let totalReadings = this.props.reduxStore.graphData.apiData.data;
@@ -47,11 +45,11 @@ class Graph extends Component {
         return report.time >= [dateFrom] && report.time <= [dateTo];
       });
       //there are four unnamed sensors
-      const unnamedSensors = totalReadings.filter( (report) => {
-        return report.sensor === "";
-      });
+      // const unnamedSensors = totalReadings.filter( (report) => {
+      //   return report.sensor === "";
+      // });
 
-      console.log("unnamedSensors: ", unnamedSensors);
+      // console.log("unnamedSensors: ", unnamedSensors);
 
       function getSensors(someData) {
         let sensors = [];
@@ -74,10 +72,10 @@ class Graph extends Component {
         return sensors;
       };
       //totalSensors will return an array of each sensor used
-      //in the filters reports
+      //in the filtered reports
       const totalSensors = getSensors(timeFilteredSensorReports);
 
-      console.log("totalSensors: ", totalSensors);
+      // console.log("totalSensors: ", totalSensors);
 
       totalSensors.forEach( (sensor) => {
         graphData.push({
@@ -98,11 +96,9 @@ class Graph extends Component {
       // console.log("graphData: ", graphData);
 
     } else {
-      console.log("dates.length === 0");
+      console.log("User has not selected any dates.");
     }
   }
-  
-
     return (
       <div>
         {/* {JSON.stringify(this.props.reduxStore)} */}
