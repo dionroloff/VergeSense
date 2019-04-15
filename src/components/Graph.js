@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Spin } from 'antd';
-
 import ReactChartkick, { LineChart } from "react-chartkick";
 import Chart from "chart.js";
 
@@ -36,6 +35,7 @@ class Graph extends Component {
     let totalReadings = this.props.reduxStore.graphData.apiData.data;
 
     if (this.props.reduxStore.graphData.dates.length !== 0) {
+      //this is assigning user-selected dates to variables
       const dateFrom = this.props.reduxStore.graphData.dates.dateFrom;
       const dateTo = this.props.reduxStore.graphData.dates.dateTo;
 
@@ -44,20 +44,17 @@ class Graph extends Component {
       const timeFilteredSensorReports = totalReadings.filter( (report) => {
         return report.time >= [dateFrom] && report.time <= [dateTo];
       });
-      //there are four unnamed sensors
-      // const unnamedSensors = totalReadings.filter( (report) => {
-      //   return report.sensor === "";
-      // });
 
-      // console.log("unnamedSensors: ", unnamedSensors);
-
-      function getSensors(someData) {
+      //this function will produce an array of each of the 
+      //sensor names in the API data
+      function getSensors(data) {
         let sensors = [];
         
         //for each object in the data array,
         //check if its "sensor" property already exists
-        //in the sensors array, if not, push the string
-        someData.forEach( (obj) => {
+        //in the sensors array, if not, push the string.
+        //If no "sensor" property, name it "Unnamed Sensor"
+        data.forEach( (obj) => {
           if (obj.sensor === "") {
             let sensor = "Unnamed Sensor";
             sensors.push(sensor);
@@ -71,12 +68,12 @@ class Graph extends Component {
         });
         return sensors;
       };
-      //totalSensors will return an array of each sensor used
-      //in the filtered reports
+      //assigns the array of each sensor used
+      //in the filtered reports to totalSensors
       const totalSensors = getSensors(timeFilteredSensorReports);
 
-      // console.log("totalSensors: ", totalSensors);
-
+      //Assigning each sensor its own object with name and data properties
+      //and push the objects to the graphData array.
       totalSensors.forEach( (sensor) => {
         graphData.push({
           name: sensor, 
@@ -84,6 +81,9 @@ class Graph extends Component {
         });
       });
 
+      //this loops through both the filtered reports and graphData array.
+      //it then assigns the time and number of people properties to the objects 
+      //in graphData
       for (let i = 0; i < timeFilteredSensorReports.length; i++) {
         for (let j = 0; j < graphData.length; j++) {
           if (timeFilteredSensorReports[i].sensor === graphData[j].name) {
@@ -93,7 +93,6 @@ class Graph extends Component {
           }
         }
       }
-      // console.log("graphData: ", graphData);
 
     } else {
       console.log("User has not selected any dates.");
