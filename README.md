@@ -2,14 +2,16 @@
 
 ## Notes
 
+This project was written using JavaScript's React framework, Chart.js, and Ant Design UI.
+
 JSON URL: https://api.jsonbin.io/b/5cafaeb4c0338e327afea672
 
 ## Challenges
 
 My thought process: I was confident in creating the database and writing the get request to the API, as these are things I have done several times before. However, I knew that when it came to constructing a graph and populating it with data points that I might have a bit more work to do. I had never really used graphs in any of my projects before, so this was something I would have to learn as I went.
 
-Luckily, chartkick makes the actual graph quite easy to navigate, the hard part was writing the logic for taking the raw API data and filtering it through the two time-points the user selects,
-then assigning the individual sensor reports to chartkick's data property.
+Luckily, Chart.js makes the actual graph quite easy to navigate, the hard part was writing the logic for taking the raw API data and filtering it through the two time-points the user selects,
+then assigning the individual sensor reports to Chart.js's data property.
 
 Getting the time and date stamps to work how I needed them to when the user chooses them was also challenging. For instance they needed to be specificly formatted and dispatched to my dates reducer for use in the graph constraints, which as noted had its own challenges.
 
