@@ -5,7 +5,6 @@ const dates = (state = [], action) => {
         case "SET_DATA":
           return action.payload;
         default: 
-          // return [{dateFrom: null, dateTo: null}];
           return state;
     }
 };
