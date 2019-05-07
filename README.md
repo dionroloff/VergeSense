@@ -1,6 +1,6 @@
 # VergeSense Code Challenge
 
-## Created by Dion Roloff as app submission to VergeSense startup.
+### Created by Dion Roloff as app submission to VergeSense startup.
 
 ## Technologies Used
 
