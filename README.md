@@ -1,5 +1,7 @@
 # VergeSense Code Challenge
 
+## Created by Dion Roloff as app submission to VergeSense startup.
+
 ## Technologies Used
 
 This project was written using JavaScript's React framework, Chart.js, and Ant Design UI.
